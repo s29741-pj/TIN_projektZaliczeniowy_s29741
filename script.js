@@ -224,34 +224,34 @@ function updateTickers() {
 
 window.onload = function () {
 	setInterval(updateTickers, 2000);
-};
+	saveBtn.addEventListener("click", checkForm);
+	lightMode.addEventListener("click", changeStyleToLight);
+	darkMode.addEventListener("click", changeStyleToDark);
+	deleteAll.addEventListener("click", deleteAllTransactions);
+	bill.addEventListener("click", downloadTxtFile);
 
-addTransactionBtn.addEventListener("click", () => {
-	showPanel(0);
-});
+	transactionAmount.addEventListener("input", function (e) {
+		let value = e.target.value;
 
-btc.addEventListener("click", () => {
-	showPanel(1);
-});
-cancelBtn.forEach(cancel => {
-	cancel.addEventListener("click", e => {
-		closePanel(e.target.attributes.order.value);
+		value = value.replace(",", ".");
+
+		const validValue = value.match(/^\d*\.?\d{0,2}$/);
+
+		if (!validValue) {
+			e.target.value = e.target.value.slice(0, -1);
+		}
 	});
-});
-saveBtn.addEventListener("click", checkForm);
-lightMode.addEventListener("click", changeStyleToLight);
-darkMode.addEventListener("click", changeStyleToDark);
-deleteAll.addEventListener("click", deleteAllTransactions);
-bill.addEventListener("click", downloadTxtFile);
 
-transactionAmount.addEventListener("input", function (e) {
-	let value = e.target.value;
+	addTransactionBtn.addEventListener("click", () => {
+		showPanel(0);
+	});
 
-	value = value.replace(",", ".");
-
-	const validValue = value.match(/^\d*\.?\d{0,2}$/);
-
-	if (!validValue) {
-		e.target.value = e.target.value.slice(0, -1);
-	}
-});
+	btc.addEventListener("click", () => {
+		showPanel(1);
+	});
+	cancelBtn.forEach(cancel => {
+		cancel.addEventListener("click", e => {
+			closePanel(e.target.attributes.order.value);
+		});
+	});
+};
