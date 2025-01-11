@@ -351,6 +351,10 @@ h2.title-small {
 		padding: 15px 8px;
 		font-size: 15px;
 	}
+	.color-buttons button {
+		width: 30px;
+		height: 30px;
+	}
 }
 
 @media (max-width: 1000px) {

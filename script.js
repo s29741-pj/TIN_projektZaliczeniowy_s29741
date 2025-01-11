@@ -137,7 +137,7 @@ const checkCategory = transaction => {
 
 const countMoney = money => {
 	const newMoney = money.reduce((a, b) => a + b);
-	availableMoney.textContent = `${newMoney} $`;
+	availableMoney.textContent = `${newMoney.toFixed(2)} $`;
 };
 
 const deleteTransaction = id => {
@@ -229,6 +229,7 @@ window.onload = function () {
 addTransactionBtn.addEventListener("click", () => {
 	showPanel(0);
 });
+
 btc.addEventListener("click", () => {
 	showPanel(1);
 });
@@ -242,3 +243,15 @@ lightMode.addEventListener("click", changeStyleToLight);
 darkMode.addEventListener("click", changeStyleToDark);
 deleteAll.addEventListener("click", deleteAllTransactions);
 bill.addEventListener("click", downloadTxtFile);
+
+transactionAmount.addEventListener("input", function (e) {
+	let value = e.target.value;
+
+	value = value.replace(",", ".");
+
+	const validValue = value.match(/^\d*\.?\d{0,2}$/);
+
+	if (!validValue) {
+		e.target.value = e.target.value.slice(0, -1);
+	}
+});
