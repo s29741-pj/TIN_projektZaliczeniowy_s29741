@@ -36,7 +36,7 @@
 
             </div>
             <div class="controls">
-                <button class="change-money"><i class="fa-brands fa-btc"></i>Kup BTC</button>
+                <button class="btc-btn"><i class="fa-brands fa-btc"></i>Ceny BTC</button>
                 <button class="bill"><i class="fa-solid fa-scroll"></i></i>Wyciąg</button>
 
             </div>
@@ -64,6 +64,7 @@
 
     </main>
 
+    <!-- Transactions -->
     <div class="add-transaction-panel">
         <div class="panel">
             <h2 class="title">Dodaj nową transakcję</h2>
@@ -98,37 +99,38 @@
             </div>
             <div class="panel-buttons">
                 <button class="save"><i class="fas fa-save"></i> Zapisz</button>
-                <button class="cancel"><i class="far fa-window-close"></i> Anuluj</button>
+                <button class="cancel" order="0"><i class="far fa-window-close"></i> Anuluj</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BTC -->
+    <div class="add-transaction-panel">
+        <div class="panel-btc">
+            <h2 class="title">BTC</h2>
+            <div class="desc">
+                <div class="usd"><i class="fa-brands fa-btc"></i><i class="fa-solid fa-slash"></i><i
+                        class="fa-solid fa-dollar-sign"></i></div>
+                <div class="usd-btc"><i class="fa-solid fa-dollar-sign"></i></div>
+            </div>
+
+            <div class="desc">
+                <div class="gbp"><i class="fa-brands fa-btc"></i><i class="fa-solid fa-slash"></i><i
+                        class="fa-solid fa-sterling-sign"></i></div>
+                <div class="gbp-btc"><i class="fa-solid fa-sterling-sign"></i></div>
+            </div>
+            <div class="desc">
+                <div class="eur"><i class="fa-brands fa-btc"></i><i class="fa-solid fa-slash"></i><i
+                        class="fa-solid fa-euro-sign"></i></div>
+                <div class="eur-btc"><i class="fa-solid fa-euro-sign"></i></div>
+            </div>
+            <div class="panel-buttons">
+                <button class="cancel" order="1"><i class="far fa-window-close"></i> Powrót</button>
             </div>
         </div>
     </div>
 
 
-    <!-- <div class="add-transaction-panel">
-        <h2 class="title">Wymień walutę</h2>
-        <label for="name">Nazwa:</label>
-        <small>(podaj nazwę transakcji)</small>
-        <input type="text" id="name"></input>
-
-        <label for="amount">Kwota:</label>
-        <small>(podaj kwotę transakcji, jeśli dodajesz wydatek, postaw znak minusa na początku kwoty) </small>
-        <input type="number" id="amount">
-
-        <label for="category">Wybierz kategorię:</label>
-        <small>( [ + ] oznacza przychód, [ - ] oznacza wydatek)</small>
-        <select id="category" onchange="selectCategory()">
-            <option value="none" selected disabled></option>
-            <option value="income">[ + ] Przychód</option>
-            <option value="shopping">[ - ] Zakupy</option>
-            <option value="food">[ - ] Jedzenie</option>
-            <option value="cinema">[ - ] Kino</option>
-        </select>
-
-        <div class="panel-buttons">
-            <button class="save"><i class="fas fa-save"></i> Zapisz</button>
-            <button class="cancel"><i class="far fa-window-close"></i> Anuluj</button>
-        </div>
-    </div> -->
 
 
 

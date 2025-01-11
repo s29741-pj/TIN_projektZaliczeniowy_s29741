@@ -7,13 +7,16 @@ const lightMode = document.querySelector(".light");
 const darkMode = document.querySelector(".dark");
 const validationWarning = document.querySelector(".warning");
 const bill = document.querySelector(".bill");
-
+const btc = document.querySelector(".btc-btn");
+const usdTicker = document.querySelector(".usd-btc");
+const gbpTicker = document.querySelector(".gbp-btc");
+const eurTicker = document.querySelector(".eur-btc");
 const addTransactionPanel = document.querySelectorAll(".add-transaction-panel");
 const transactionName = document.querySelector("#name");
 const transactionAmount = document.querySelector("#amount");
 const transactionCategory = document.querySelector("#category");
 const saveBtn = document.querySelector(".save");
-const cancelBtn = document.querySelector(".cancel");
+const cancelBtn = document.querySelectorAll(".cancel");
 const iconList = [
 	'<i class="fas fa-money-bill-wave"></i>',
 	'<i class="fas fa-cart-arrow-down"></i>',
@@ -31,12 +34,20 @@ let selectedCategory;
 let moneyArr = [0];
 
 const showPanel = index => {
-	addTransactionPanel[index].style.display = "flex";
+	if (index == 0) {
+		addTransactionPanel[index].style.display = "flex";
+	} else if (index == 1) {
+		addTransactionPanel[index].style.display = "flex";
+	}
 };
 
 const closePanel = index => {
-	addTransactionPanel[index].style.display = "none";
-	clearInputs();
+	if (index == 0) {
+		addTransactionPanel[index].style.display = "none";
+		clearInputs();
+	} else if (index == 1) {
+		addTransactionPanel[index].style.display = "none";
+	}
 };
 
 const checkForm = () => {
@@ -164,25 +175,6 @@ const changeStyleToDark = () => {
 	root.style.setProperty("--border-color", "rgba(255,255,255,.4");
 };
 
-addTransactionBtn.addEventListener("click", () => {
-	showPanel(0);
-});
-cancelBtn.addEventListener("click", () => {
-	closePanel(0);
-});
-saveBtn.addEventListener("click", checkForm);
-lightMode.addEventListener("click", changeStyleToLight);
-darkMode.addEventListener("click", changeStyleToDark);
-deleteAll.addEventListener("click", deleteAllTransactions);
-
-// ! 08.01 stop
-// ! dodać obsługę i przeliczanie
-// https://api.coindesk.com/v1/bpi/currentprice.json
-// fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
-// .then(response => response.json())
-// .then(data => console.log(data))
-// .catch(error => console.error('Error:', error));
-
 function downloadTxtFile() {
 	const maxLength = Math.max(incomeList.length, expenseList.length);
 
@@ -208,4 +200,45 @@ function downloadTxtFile() {
 	URL.revokeObjectURL(url);
 }
 
+async function downloadBtcData() {
+	//https://api.coindesk.com/v1/bpi/currentprice.json
+	const response = await fetch(
+		"https://api.coindesk.com/v1/bpi/currentprice.json"
+	);
+	const json = await response.json();
+
+	return json;
+}
+
+function updateTickers() {
+	downloadBtcData().then(response => {
+		usdTicker.innerHTML = `${response.bpi.USD.rate} <i class="fa-solid fa-dollar-sign"></i>`;
+	});
+	downloadBtcData().then(response => {
+		gbpTicker.innerHTML = `${response.bpi.GBP.rate} <i class="fa-solid fa-sterling-sign"></i>`;
+	});
+	downloadBtcData().then(response => {
+		eurTicker.innerHTML = `${response.bpi.EUR.rate} <i class="fa-solid fa-euro-sign"></i>`;
+	});
+}
+
+window.onload = function () {
+	setInterval(updateTickers, 2000);
+};
+
+addTransactionBtn.addEventListener("click", () => {
+	showPanel(0);
+});
+btc.addEventListener("click", () => {
+	showPanel(1);
+});
+cancelBtn.forEach(cancel => {
+	cancel.addEventListener("click", e => {
+		closePanel(e.target.attributes.order.value);
+	});
+});
+saveBtn.addEventListener("click", checkForm);
+lightMode.addEventListener("click", changeStyleToLight);
+darkMode.addEventListener("click", changeStyleToDark);
+deleteAll.addEventListener("click", deleteAllTransactions);
 bill.addEventListener("click", downloadTxtFile);
