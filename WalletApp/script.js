@@ -6,6 +6,7 @@ const deleteAll = document.querySelector(".delete-all");
 const lightMode = document.querySelector(".light");
 const darkMode = document.querySelector(".dark");
 const validationWarning = document.querySelector(".warning");
+const bill = document.querySelector(".bill");
 
 const addTransactionPanel = document.querySelectorAll(".add-transaction-panel");
 const transactionName = document.querySelector("#name");
@@ -19,6 +20,9 @@ const iconList = [
 	'<i class="fas fa-hamburger"></i>',
 	'<i class="fas fa-film"></i>',
 ];
+
+let incomeList = [];
+let expenseList = [];
 
 let root = document.documentElement;
 let ID = 0;
@@ -65,13 +69,17 @@ const createNewTransaction = () => {
 
 	if (categoryIcon != iconList[0] && newTransactionValue >= 0) {
 		newTransactionValue = newTransactionValue * -1;
+		expenseList.push(`${newTransactionName}, ${newTransactionValue}$`);
+	} else {
+		incomeList.push(`${newTransactionName}, ${newTransactionValue}$`);
 	}
 
-	console.log(newTransactionValue);
+	console.log(expenseList);
+	console.log(incomeList);
 
 	newTransaction.innerHTML = ` 
         <p class="transaction-name">${categoryIcon} ${newTransactionName}</p>
-        <p class="transaction-amount">${newTransactionValue} zł
+        <p class="transaction-amount">${newTransactionValue} $
         <button class="delete" onclick="deleteTransaction(${ID})"><i class="fas fa-times"></i></button></p>
         `;
 	newTransactionValue > 0 && categoryIcon == iconList[0]
@@ -118,7 +126,7 @@ const checkCategory = transaction => {
 
 const countMoney = money => {
 	const newMoney = money.reduce((a, b) => a + b);
-	availableMoney.textContent = `${newMoney} zł`;
+	availableMoney.textContent = `${newMoney} $`;
 };
 
 const deleteTransaction = id => {
@@ -140,7 +148,7 @@ const deleteTransaction = id => {
 const deleteAllTransactions = () => {
 	incomeArea.innerHTML = "<h3>Przychody:</h3>";
 	expensesArea.innerHTML = "<h3>Wydatki:</h3>";
-	availableMoney.textContent = "0zł";
+	availableMoney.textContent = "0$";
 	moneyArr = [0];
 };
 
@@ -174,42 +182,30 @@ deleteAll.addEventListener("click", deleteAllTransactions);
 // .then(response => response.json())
 // .then(data => console.log(data))
 // .catch(error => console.error('Error:', error));
-// ! dodać export do txt danych z transakcji
-// HTML structure to include in your HTML file
-// <button id="download-btn">Download File</button>
 
-// JavaScript code
-// const list1 = ["Item1", "Item2", "Item3", "Item4"];
-// const list2 = ["Data1", "Data2", "Data3", "Data4"];
+function downloadTxtFile() {
+	const maxLength = Math.max(incomeList.length, expenseList.length);
 
-// // Function to create and download the text file
-// function downloadTxtFile() {
-//   if (list1.length !== list2.length) {
-//     alert("Lists have different lengths. Ensure both lists have the same number of elements.");
-//     return;
-//   }
+	let content = "Incomes:\t\t\tExpenses:\n";
+	for (let i = 0; i < maxLength; i++) {
+		const column1 = incomeList[i] !== undefined ? incomeList[i] : "";
+		const column2 = expenseList[i] !== undefined ? expenseList[i] : "";
+		content += `\t${column1}\t\t\t\t${column2}\n`;
+	}
 
-//   let content = "Column 1\tColumn 2\n"; // Header row with tab separator
-//   for (let i = 0; i < list1.length; i++) {
-//     content += `${list1[i]}\t${list2[i]}\n`; // Add rows with tab separation
-//   }
+	content += `\n\nSaldo: ${availableMoney.textContent}`;
 
-//   // Create a blob with the content
-//   const blob = new Blob([content], { type: "text/plain" });
-//   const url = URL.createObjectURL(blob);
+	const blob = new Blob([content], { type: "text/plain" });
+	const url = URL.createObjectURL(blob);
 
-//   // Create a temporary link and trigger the download
-//   const a = document.createElement("a");
-//   a.href = url;
-//   a.download = "data.txt";
-//   document.body.appendChild(a);
-//   a.click();
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = "data.txt";
+	document.body.appendChild(a);
+	a.click();
 
-//   // Cleanup
-//   document.body.removeChild(a);
-//   URL.revokeObjectURL(url);
-// }
+	document.body.removeChild(a);
+	URL.revokeObjectURL(url);
+}
 
-// // Attach the function to the button
-// const button = document.getElementById("download-btn");
-// button.addEventListener("click", downloadTxtFile);
+bill.addEventListener("click", downloadTxtFile);
