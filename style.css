@@ -10,8 +10,14 @@
 	--border-color: rgba(0, 0, 0, 0.2);
 }
 
+html {
+	position: relative;
+	z-index: -30;
+}
+
 body {
 	min-height: 100vh;
+	width: 100vw;
 	font-family: "Montserrat", sans-serif;
 	color: var(--second-color);
 	background: rgb(2, 0, 36);
@@ -22,6 +28,9 @@ body {
 		rgba(0, 212, 255, 1) 100%
 	);
 	padding-bottom: 2%;
+	position: relative;
+	z-index: -20;
+	overflow: hidden;
 }
 
 header {
@@ -31,7 +40,10 @@ header {
 	flex-direction: column;
 	margin-bottom: 40px;
 	height: 20vh;
+	width: 100%;
 	background-color: var(--first-color);
+	position: relative;
+	z-index: 10;
 }
 
 header h1 {
@@ -50,6 +62,8 @@ main {
 	align-items: center;
 	min-height: 70vh;
 	background-color: var(--first-color);
+	position: relative;
+	z-index: 20;
 }
 
 h2.title {
@@ -164,19 +178,21 @@ h2.title-small {
 
 .controls {
 	display: flex;
-	justify-content: space-evenly;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 }
 
 .controls button {
-	width: 40%;
+	width: 70%;
 	padding: 15px 10px;
 	border: 1px solid var(--border-color);
 	border-radius: 5px;
 	color: var(--second-color);
 	background: none;
 	transition: color 0.3s, background-color 0.3s;
-	font-size: 20px;
+	font-size: 16px;
 	cursor: pointer;
 }
 
@@ -230,6 +246,7 @@ h2.title-small {
 	align-items: center;
 	flex-direction: column;
 	position: absolute;
+	z-index: 99;
 	top: 0;
 	left: 0;
 	color: #fff;
@@ -331,10 +348,16 @@ h2.title-small {
 	border: 5px solid red;
 }
 
+.debetBox {
+	background-color: #f3f2f2;
+	width: 45%;
+	height: 10%;
+}
+
 @media (max-width: 1600px) {
 	.controls button {
-		padding: 15px 10px;
-		font-size: 16px;
+		padding: 2px 10px;
+		font-size: 12px;
 	}
 }
 
@@ -344,11 +367,11 @@ h2.title-small {
 		flex-direction: column;
 		justify-content: space-evenly;
 		width: 90%;
-		height: 25%;
+		height: 30%;
 	}
 	.controls button {
 		width: 100%;
-		padding: 15px 8px;
+		padding: 9px 8px;
 		font-size: 15px;
 	}
 	.color-buttons button {
@@ -363,7 +386,13 @@ h2.title-small {
 		flex-direction: column;
 		justify-content: space-evenly;
 		width: 90%;
-		height: 25%;
+		height: 30%;
+	}
+
+	.available-money {
+		margin-top: -10px;
+		text-align: center;
+		font-size: 50px;
 	}
 }
 
@@ -402,7 +431,7 @@ h2.title-small {
 	.available-money {
 		margin-top: -10px;
 		text-align: center;
-		font-size: 50px;
+		font-size: 30px;
 	}
 
 	h2.title-small {
@@ -414,20 +443,20 @@ h2.title-small {
 	}
 
 	.transactions {
-		width: 100%;
+		width: 95%;
 	}
 }
 
 @media (max-width: 700px) {
-	.controls button {
+	/* .controls button {
 		width: 100%;
 		padding: 10px 8px;
 		font-size: 13px;
-	}
+	} */
 }
 
 @media (max-width: 550px) {
-	.controls,
+	/* .controls,
 	.top {
 		flex-direction: column;
 		justify-content: center;
@@ -437,12 +466,12 @@ h2.title-small {
 	.controls button {
 		padding: 25px 8px;
 		font-size: 12px;
-	}
+	} */
 }
 
 @media (max-width: 600px) {
-	.controls button {
+	/* .controls button {
 		padding: 12px 26px;
 		font-size: 9px;
-	}
+	} */
 }

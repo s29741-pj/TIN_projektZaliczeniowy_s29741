@@ -24,6 +24,8 @@ const iconList = [
 	'<i class="fas fa-film"></i>',
 ];
 
+const debetBox = document.querySelector(".debetBox");
+
 let incomeList = [];
 let expenseList = [];
 
@@ -85,9 +87,6 @@ const createNewTransaction = () => {
 		incomeList.push(`${newTransactionName}, ${newTransactionValue}$`);
 	}
 
-	console.log(expenseList);
-	console.log(incomeList);
-
 	newTransaction.innerHTML = ` 
         <p class="transaction-name">${categoryIcon} ${newTransactionName}</p>
         <p class="transaction-amount">${newTransactionValue} $
@@ -138,6 +137,10 @@ const checkCategory = transaction => {
 const countMoney = money => {
 	const newMoney = money.reduce((a, b) => a + b);
 	availableMoney.textContent = `${newMoney.toFixed(2)} $`;
+	console.log(newMoney.toFixed(2));
+	newMoney.toFixed(2) <= 0
+		? debetBox.classList.remove("hidden")
+		: debetBox.classList.add("hidden");
 };
 
 const deleteTransaction = id => {
@@ -192,7 +195,7 @@ function downloadTxtFile() {
 
 	const a = document.createElement("a");
 	a.href = url;
-	a.download = "data.txt";
+	a.download = "transaction_data.txt";
 	document.body.appendChild(a);
 	a.click();
 
