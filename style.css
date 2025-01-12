@@ -371,11 +371,11 @@ h2.title-small {
 		flex-direction: column;
 		justify-content: space-evenly;
 		width: 90%;
-		height: 30%;
+		height: 40%;
 	}
 	.controls button {
 		width: 100%;
-		/* padding: 9px 8px; */
+		padding: 9px 8px;
 		font-size: 15px;
 	}
 	.color-buttons button {
