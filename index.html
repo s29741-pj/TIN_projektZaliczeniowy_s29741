@@ -17,7 +17,7 @@
 
     <header>
         <h1><i class="fas fa-wallet"></i> Wallet</h1>
-        <p>Twój osobisty menedżer finansów.</p>
+        <p>Your personal finance manager.</p>
     </header>
 
     <main>
@@ -27,7 +27,7 @@
                         src="https://www.bocianpozyczki.pl/img/pk/pk-logo.png" alt="bocian logo"></a>
             </div>
             <div>
-                <h2 class="title">Dostępne środki:</h2>
+                <h2 class="title">Available money:</h2>
                 <p class="available-money">0$</p>
             </div>
             <div class="controls top">
@@ -37,7 +37,7 @@
                 <button class="bill"><i class="fa-solid fa-scroll"></i></i>Wyciąg</button>
             </div>
             <div class="style-selection">
-                <h2 class="title-small">Wybierz styl:</h2>
+                <h2 class="title-small">Choose style:</h2>
                 <div class="color-buttons">
                     <button class="light"></button>
                     <button class="dark"></button>
@@ -45,10 +45,10 @@
             </div>
         </section>
         <section class="transactions">
-            <h2 class="title">transakcje</h2>
+            <h2 class="title">transactions</h2>
             <div class="transaction-list">
                 <div class="income-area">
-                    <h3>Przychody:</h3>
+                    <h3>Revenues:</h3>
                     <!-- data for resposiveness test -->
                     <!-- <div class="transaction income" id="0">
                         <p class="transaction-name"><i class="fas fa-money-bill-wave" aria-hidden="true"></i> e</p>
@@ -143,7 +143,7 @@
                     </div> -->
                 </div>
                 <div class="expenses-area">
-                    <h3>Wydatki:</h3>
+                    <h3>Expenditures:</h3>
                 </div>
             </div>
         </section>
@@ -154,34 +154,34 @@
     <!-- Transactions -->
     <div class="add-transaction-panel">
         <div class="panel">
-            <h2 class="title">Dodaj nową transakcję</h2>
+            <h2 class="title">Add new transaction</h2>
             <div class="desc">
-                <label for="name">Nazwa:</label>
-                <small>(podaj nazwę transakcji)</small>
+                <label for="name">Name:</label>
+                <small>(add transaction name)</small>
             </div>
             <input type="text" id="name"></input>
 
             <div class="desc">
-                <label for="amount">Kwota:</label>
-                <small>(podaj kwotę transakcji) </small>
+                <label for="amount">Amount:</label>
+                <small>(add amount) </small>
             </div>
 
             <input type="number" id="amount">
 
             <div class="desc">
-                <label for="category">Wybierz kategorię:</label>
-                <small>( [ + ] oznacza przychód, [ - ] oznacza wydatek)</small>
+                <label for="category">Choose category:</label>
+                <small>( [ + ] revenue, [ - ] expenditure)</small>
 
             </div>
             <select id="category" onchange="selectCategory()">
                 <option value="none" selected disabled></option>
-                <option value="income">[ + ] Przychód</option>
-                <option value="shopping">[ - ] Zakupy</option>
-                <option value="food">[ - ] Jedzenie</option>
-                <option value="cinema">[ - ] Kino</option>
+                <option value="income">[ + ] Revenue</option>
+                <option value="shopping">[ - ] Shopping</option>
+                <option value="food">[ - ] Food</option>
+                <option value="cinema">[ - ] Entertainment</option>
             </select>
             <div class="warning hidden">
-                <h3>Uzupełnij wszystkie pola!</h3>
+                <h3>All fields must be filled!</h3>
 
             </div>
             <div class="panel-buttons">
